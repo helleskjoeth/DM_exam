@@ -1,0 +1,29 @@
+model {
+	# Implementation of JZS priors 
+	a.gamma <- 1/2
+	b.gamma <- ngroups/2
+	
+	#------ priors ------------------------------------------ 
+	phi ~ dgamma(.01,.01)
+	
+	invg ~ dgamma(a.gamma,b.gamma) 
+	g <- 1/invg
+	
+	vari <- (g/phi) * invSigma 
+	prec <- 1/vari
+	
+	beta0 ~ dnorm(0,1) 
+	betaX ~ dnorm(0,prec)
+	
+	#------ National level regressions ---------------------------- 
+	for (n in 1:nnations) {
+		nat_mu[n] <- beta0 + (betaX*(X[n])) 
+	}
+	
+	sigma ~ dgamma(.01,.01)
+
+	#---- Group level model ----------------------- 
+	for (g in 1:ngroups) {
+		Y[g] ~ dnorm(nat_mu[Nation[g]],sigma) 
+	}
+}

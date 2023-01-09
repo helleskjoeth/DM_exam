@@ -1,0 +1,221 @@
+---
+title: "data_prep"
+author: "Helle"
+date: "2023-01-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Loading packages
+
+```{r}
+#install.packages('pacman')
+pacman::p_load('tidyverse', 'R2jags', 'plyr')
+
+```
+
+Loading data country by country to inspect files. 
+
+```{r}
+#setwd("work/Exam-stuff")
+
+
+aus<- read.table("Data/Australia.txt", header = T, sep = ",")
+
+bel <- read.table("Data/Belarus.txt", header = T, sep = ",")
+
+chi <- read.table("Data/China.txt", header = T, sep = ",")
+
+den <- read.table("Data/Denmark.txt", header = T, sep = ",")
+
+eng <- read.table("Data/England.txt", header = T, sep = ",")
+
+germ <- read.table("Data/Germany.txt", header = T, sep = ",")
+
+gree <- read.table("Data/Greece.txt", header = T, sep = ",")
+
+rus <- read.table("Data/Russia.txt", header = T, sep = ",")
+
+sko <- read.table("Data/South Korea.txt", header = T, sep = ",")
+
+swi <- read.table("Data/Switzerland.txt", header = T, sep = ",")
+
+tur <- read.table("Data/Turkey.txt", header = T, sep = ",")
+
+ukr <- read.table("Data/Ukraine.txt", header = T, sep = ",")
+
+usa <- read.table("Data/United States.txt", header = T, sep = ",")
+
+oma <- read.table("Data/Oman.txt", header = T, sep = ",")
+
+saudi <- read.table("Data/Saudi Arabia.txt", header = T, sep = ",")
+```
+
+
+```{r}
+#Keep only the newest data
+aus <- aus %>% 
+  filter(row_number()==n())
+
+bel <- bel %>% 
+  filter(row_number()==n())
+
+chi <- chi %>% 
+  filter(row_number()==n())
+
+den <- den %>% 
+  filter(row_number()==n())
+
+eng <- eng %>% 
+  filter(row_number()==n())
+
+germ <- germ %>% 
+  filter(row_number()==n())
+
+gree <- gree %>% 
+  filter(row_number()==n())
+
+rus <- rus %>% 
+  filter(row_number()==n())
+
+sko <- sko %>% 
+  filter(row_number()==n())
+
+swi <- swi %>% 
+  filter(row_number()==n())
+
+tur <- tur %>% 
+  filter(row_number()==n())
+
+ukr <- ukr %>% 
+  filter(row_number()==n())
+
+usa <- usa %>% 
+  filter(row_number()==n())
+
+oma <- oma %>% 
+  filter(row_number()==n())
+
+saudi <- saudi %>% 
+  filter(row_number()==n())
+
+```
+
+Merge data 
+
+```{r}
+#put all data frames into list
+df_list <- list(aus, bel, chi, den, eng, germ, gree, rus, sko, swi, tur, ukr, usa, oma, saudi)
+
+#merge all data frames in list
+df <- df_list %>% reduce(full_join)
+
+#I'm interested in the 'people_fully_vaccinated' column, and notice that there are NA's for China and Russia
+#So let's go back and look at these 
+
+chi <- read.table("Data/China.txt", header = T, sep = ",")
+#Last data from China is in line 644
+
+rus <- read.table("Data/Russia.txt", header = T, sep = ",")
+#russia line 467
+
+#Let's load these lines instead. 
+
+chi <- chi %>% 
+  filter(row_number()==644)
+
+rus <- rus %>% 
+  filter(row_number()==467)
+
+#Let's create dataframe again
+
+#put all data frames into list
+df_list <- list(aus, bel, chi, den, eng, germ, gree, rus, sko, swi, tur, ukr, usa, oma, saudi)
+
+#merge all data frames in list
+df <- df_list %>% reduce(full_join)
+
+#Perfect! 
+
+
+```
+
+Let's check how new the data is:
+
+```{r}
+# order by date 
+
+df <-df[order(df$date),]
+print(df$date)
+
+#dates range from february 2022 to January 2023.
+
+```
+
+To make the people_fully_vaccinated numbers more meaningful I'll calculate percentage of inhabitants per country. 
+
+```{r}
+#list of contries 
+print(df$location)
+location<- c("Turkey", "Belarus", "China", "England", "Australia" ,"Switzerland" , "United States" , "Denmark" ,      "Germany" ,"Greece" , "Russia" ,"South Korea", "Oman", "Saudi Arabia", "Ukraine")
+
+
+#population info from: https://worldpopulationreview.com/countries per 2022
+#but england from https://populationdata.org.uk/population-of-england/ 
+population <- c( 85341241, 9534954, 1425887337, 56550138, 26177413 , 8740472, 338289857, 5882261 , 83369843, 10384971, 144713314, 51815810, 4576298, 36408820, 39701739)
+
+pop <- cbind(location, population)
+
+pop <- as.data.frame(pop)
+
+pop$location <- as.factor(pop$location)
+df$location <- as.factor(df$location)
+
+
+df <- merge(df, pop, by = "location")
+
+
+#calculate percanteg of fully vaccinated people 
+
+str(df)
+df$population <- as.numeric(df$population)
+
+df$percent_vacc <- df$people_fully_vaccinated/df$population*100
+
+#Great!
+
+```
+
+
+
+
+
+Massachusetts data
+
+```{r}
+
+mass <- data.frame(location = "Massachusets",date = "2023-01-02", people_fully_vaccinated = 5614713, population = 6981974 )
+
+
+mass$people_fully_vaccinated/mass$population*100
+#80.42% of people vaccinated in Massachusetts 
+
+#df <- rbind.fill(df, mass)
+
+#df$percent_vacc <- df$people_fully_vaccinated/df$population*100
+
+```
+
+Save the data 
+
+```{r}
+write_csv(df, "Data/clean_data.csv")
+```
+
+
+
+
+

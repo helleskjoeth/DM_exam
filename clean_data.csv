@@ -1,0 +1,16 @@
+location,date,vaccine,source_url,total_vaccinations,people_vaccinated,people_fully_vaccinated,total_boosters,single_shots,single_shots_2nd,total_boosters_2,total_boosters_biv,population,percent_vacc
+Australia,2022-12-22,"Moderna, Novavax, Oxford/AstraZeneca, Pfizer/BioNTech",https://covidbaseau.com/,63583562,22235469,21656484,19691609,NA,NA,NA,NA,26177413,82.72965705205476
+Belarus,2022-12-04,"KoviVac/Chumakov, Sinopharm/Beijing, Sputnik Light, Sputnik V",https://covid19.who.int/,17358735,6518021,6403134,4612801,NA,NA,NA,NA,9534954,67.15432502348727
+China,2022-12-13,"CanSino, IMBCAMS, KCONVAC, Sinopharm/Beijing, Sinopharm/Wuhan, Sinovac, ZF2001",http://www.nhc.gov.cn/xcs/s3574/202212/b927d43bd0354ffeb5a8e1b91377302f.shtml,3451677000,1307222000,1274018000,815718000,NA,NA,NA,NA,1425887337,89.34913488189565
+Denmark,2023-01-03,"Johnson&Johnson, Moderna, Pfizer/BioNTech",https://covid19.ssi.dk/overvagningsdata/download-fil-med-vaccinationsdata,13169235,4796000,4760591,3658724,46080,165,NA,NA,5882261,80.93131195640588
+England,2022-12-18,"Moderna, Oxford/AstraZeneca, Pfizer/BioNTech",https://coronavirus.data.gov.uk/details/vaccinations,144153933,45374671,42878848,63562222,NA,NA,NA,NA,56550138,75.8244798624541
+Germany,2023-01-03,"Johnson&Johnson, Moderna, Novavax, Oxford/AstraZeneca, Pfizer/BioNTech, Valneva",https://impfdashboard.de/,190467964,64849318,63536409,64376346,NA,NA,NA,NA,83369843,76.21030184739583
+Greece,2023-01-04,"Johnson&Johnson, Moderna, Novavax, Oxford/AstraZeneca, Pfizer/BioNTech",https://www.data.gov.gr/datasets/mdg_emvolio/,22024898,7932516,7642980,7027838,NA,NA,NA,NA,10384971,73.59654639382238
+Oman,2022-10-25,"CanSino, Covaxin, Johnson&Johnson, Moderna, Oxford/AstraZeneca, Pfizer/BioNTech, Sinopharm/Beijing, Sinovac, Sputnik Light, Sputnik V",https://covid19.who.int/,7086050,3257365,3048826,779859,NA,NA,NA,NA,4576298,66.622103717896
+Russia,2023-01-04,"Sputnik V, EpiVacCorona",https://gogov.ru/articles/covid-v-stats,183894218,87673830,78930288,NA,NA,NA,NA,NA,144713314,54.5425198402961
+Saudi Arabia,2022-12-04,"Oxford/AstraZeneca, Pfizer/BioNTech",https://covid19.who.int/,68148406,26951666,25351683,NA,NA,NA,NA,NA,36408820,69.6306087371137
+South Korea,2023-01-04,"Johnson&Johnson, Moderna, Novavax, Oxford/AstraZeneca, Pfizer/BioNTech",https://ncv.kdca.go.kr/,NA,44868285,44448841,NA,NA,NA,NA,NA,51815810,85.78239151332383
+Switzerland,2022-12-27,"Johnson&Johnson, Moderna, Novavax, Pfizer/BioNTech",https://opendata.swiss/en/dataset/covid-19-schweiz?detGeo=CH,16868591,6095229,6011518,4832229,NA,NA,NA,NA,8740472,68.77795615614352
+Turkey,2022-11-22,"Pfizer/BioNTech, Sinovac, Turkovac",https://covid19asi.saglik.gov.tr/,152543341,57941051,53176961,41425329,NA,NA,NA,NA,85341241,62.31097694021113
+Ukraine,2022-02-27,"Johnson&Johnson, Moderna, Oxford/AstraZeneca, Pfizer/BioNTech, Sinovac",https://covid19.who.int/,31668577,15774300,15153577,741197,NA,NA,NA,NA,39701739,38.16854722660889
+United States,2022-12-27,"Johnson&Johnson, Moderna, Novavax, Pfizer/BioNTech",https://data.cdc.gov/Vaccinations/COVID-19-Vaccination-Trends-in-the-United-States-N/rh2h-3yt2,663822575,268363272,229135170,NA,NA,NA,34425419,47146355,338289857,67.73338462820067
